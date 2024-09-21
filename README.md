@@ -21,3 +21,8 @@ $ composer install
 $ php artisan key:generate
 $ php artisan migrate:fresh
 ```
+6. Pasang NPM Dependency
+```
+$ npm install
+$ npm run build
+```
