@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <main>
+            <a class="btn btn-primary" href="{{ route('products.create') }}">Add New</a>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -32,10 +33,16 @@
                             <td>{{ $product->min_wholesale_qty }}</td>
                             <td>{{ $product->quantity }}</td>
                             <td>
-                                <a href="{{ route('products.edit', $product) }}">
-                                    Edit
-                                </a>
-                                <a href="">Delete</a>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-warning" href="{{ route('products.edit', $product) }}">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('products.destroy', $product) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
