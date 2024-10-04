@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +35,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|string|max:100',
+            'description' => 'nullable|string|max:255',
+            'retail_price' => 'required|numeric|min:1|max:999999',
+            'wholesale_price' => 'required|numeric|min:1|max:999999|lte:retail_price',
+            'min_wholesale_qty' => 'required|integer|min:10',
+            'quantity' => 'required|integer|min:0',
         ]);
 
         Product::create($request->all());
@@ -58,7 +68,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        dd($request->all());
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'nullable|string|max:255',
+            'retail_price' => 'required|numeric|min:1|max:999999',
+            'wholesale_price' => 'required|numeric|min:1|max:999999|lte:retail_price',
+            'min_wholesale_qty' => 'required|integer|min:10',
+            'quantity' => 'required|integer|min:0',
+        ]);
+
+        Product::where('id', $product->id)
+            ->update($request->except(['_token', '_method']));
+        return redirect()->route('products.index');
     }
 
     /**
@@ -66,6 +87,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }

@@ -18,27 +18,33 @@
                 <div class="row">
                     <div class="col-12">
                         <label class="form-label" for="name">Name</label>
-                        <input class="form-control" type="text" name="name" id="name">
+                        <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
+                            id="name" value="{{ old('name') }}">
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description"
+                            rows="3">{{ old('description') }}</textarea>
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="retail_price">Retail Price</label>
-                        <input class="form-control" type="number" name="retail_price" id="retail_price">
+                        <input class="form-control @error('retail_price') is-invalid @enderror" type="number"
+                            name="retail_price" id="retail_price" value="{{ old('retail_price') }}">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="wholesale_price">Wholesale Price</label>
-                        <input class="form-control" type="number" name="wholesale_price" id="wholesale_price">
+                        <input class="form-control @error('wholesale_price') is-invalid @enderror" type="number"
+                            name="wholesale_price" id="wholesale_price" value="{{ old('wholesale_price') }}">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="min_wholesale_qty">Min Wholesale Qty.</label>
-                        <input class="form-control" type="number" name="min_wholesale_qty" id="min_wholesale_qty">
+                        <input class="form-control @error('min_wholesale_qty') is-invalid @enderror" type="number"
+                            name="min_wholesale_qty" id="min_wholesale_qty" value="{{ old('min_wholesale_qty') }}">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="quantity">Quantity</label>
-                        <input class="form-control" type="number" name="quantity" id="quantity">
+                        <input class="form-control @error('quantity') is-invalid @enderror" type="number" name="quantity"
+                            id="quantity" value="{{ old('quantity') }}">
                     </div>
 
                     <button class="btn btn-primary mt-3" type="submit">Add</button>

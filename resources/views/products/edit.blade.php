@@ -20,31 +20,35 @@
                 <div class="row">
                     <div class="col-12">
                         <label class="form-label" for="name">Name</label>
-                        <input class="form-control" type="text" name="name" id="name" value="{{ $product->name }}">
+                        <input class="form-control  @error('name') is-invalid @enderror" type="text" name="name"
+                            id="name" value="{{ old('name', $product->name) }}">
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="3">{{ $product->description }}</textarea>
+                        <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description"
+                            rows="3">{{ old('description', $product->description) }}</textarea>
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="retail_price">Retail Price</label>
-                        <input class="form-control" type="number" name="retail_price" id="retail_price"
-                            value="{{ $product->retail_price }}">
+                        <input class="form-control  @error('retail_price') is-invalid @enderror" type="number"
+                            name="retail_price" id="retail_price" value="{{ old('retail_price', $product->retail_price) }}">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="wholesale_price">Wholesale Price</label>
-                        <input class="form-control" type="number" name="wholesale_price" id="wholesale_price"
-                            value="{{ $product->wholesale_price }}">
+                        <input class="form-control @error('wholesale_price') is-invalid @enderror" type="number"
+                            name="wholesale_price" id="wholesale_price"
+                            value="{{ old('wholesale_price', $product->wholesale_price) }}">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="min_wholesale_qty">Min Wholesale Qty.</label>
-                        <input class="form-control" type="number" name="min_wholesale_qty" id="min_wholesale_qty"
-                            value="{{ $product->min_wholesale_qty }}">
+                        <input class="form-control  @error('min_wholesale_qty') is-invalid @enderror" type="number"
+                            name="min_wholesale_qty" id="min_wholesale_qty"
+                            value="{{ old('min_wholesale_qty', $product->min_wholesale_qty) }}">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="quantity">Quantity</label>
-                        <input class="form-control" type="number" name="quantity" id="quantity"
-                            value="{{ $product->quantity }}">
+                        <input class="form-control @error('quantity') is-invalid @enderror" type="number" name="quantity"
+                            id="quantity" value="{{ old('quantity', $product->quantity) }}">
                     </div>
 
                     <button class="btn btn-primary mt-3" type="submit">Update</button>
