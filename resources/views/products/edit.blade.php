@@ -13,7 +13,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('products.update', $product) }}" method="POST">
+            <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
 
@@ -50,7 +50,12 @@
                         <input class="form-control @error('quantity') is-invalid @enderror" type="number" name="quantity"
                             id="quantity" value="{{ old('quantity', $product->quantity) }}">
                     </div>
-
+                    <div class="col-6">
+                        <label class="form-label" for="photo">Photo</label>
+                        <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo"
+                            id="photo">
+                        <img src="{{ Storage::url($product->photo) }}" class="img-fluid">
+                    </div>
                     <button class="btn btn-primary mt-3" type="submit">Update</button>
                 </div>
             </form>

@@ -11,13 +11,12 @@ class ProductController extends Controller
     // {
     //     $this->middleware('auth');
     // }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate();
         return view('products.index', compact('products'));
     }
 
@@ -41,9 +40,20 @@ class ProductController extends Controller
             'wholesale_price' => 'required|numeric|min:1|max:999999|lte:retail_price',
             'min_wholesale_qty' => 'required|integer|min:10',
             'quantity' => 'required|integer|min:0',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Product::create($request->all());
+        $product = Product::create($request->all()); //id 3
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->hashName();
+            $filePath = $file->storeAs('public', $fileName); //Simpan file di server
+            $product->update([
+                'photo' => $filePath
+            ]);
+        }
+
         return redirect()->route('products.index');
     }
 
@@ -75,10 +85,21 @@ class ProductController extends Controller
             'wholesale_price' => 'required|numeric|min:1|max:999999|lte:retail_price',
             'min_wholesale_qty' => 'required|integer|min:10',
             'quantity' => 'required|integer|min:0',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Product::where('id', $product->id)
-            ->update($request->except(['_token', '_method']));
+        $product = Product::where('id', $product->id);
+        $product->update($request->except(['_token', '_method']));
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->hashName();
+            $filePath = $file->storeAs('public', $fileName); //Simpan file di server
+            $product->update([
+                'photo' => $filePath
+            ]);
+        }
+
         return redirect()->route('products.index');
     }
 

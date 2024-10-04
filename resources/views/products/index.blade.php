@@ -2,12 +2,13 @@
 
 @section('content')
     <div class="container">
-        <a class="btn btn-primary" href="{{ route('products.create') }}">Add New</a>
         <main>
+            <a class="btn btn-primary" href="{{ route('products.create') }}">Add New</a>
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>#ID</th>
+                        <th>Photo</th>
                         <th>Product Name</th>
                         <th>Description</th>
                         <th>Retail Price</th>
@@ -22,6 +23,9 @@
                     @foreach ($products as $product)
                         <tr>
                             <td>{{ $product->id }}</td>
+                            <td>
+                                <img src="{{ Storage::url($product->photo) }}" class="img-thumbnail w-50">
+                            </td>
                             <td>
                                 <a href="{{ route('products.show', $product) }}">
                                     {{ $product->name }}
@@ -46,6 +50,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    {{ $products->links() }}
                 </tbody>
             </table>
         </main>
