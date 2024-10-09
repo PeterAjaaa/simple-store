@@ -50,9 +50,10 @@
                             </td>
                         </tr>
                     @endforeach
-                    {{ $products->links() }}
                 </tbody>
             </table>
+
+            {{ $products->links() }}
         </main>
     </div>
 @endsection
