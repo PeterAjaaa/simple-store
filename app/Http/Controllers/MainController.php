@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -11,7 +12,7 @@ class MainController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $products = \App\Models\Product::paginate(15);
+        $products = Product::paginate(15);
         return view('main', compact('products'));
     }
 }
