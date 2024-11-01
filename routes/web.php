@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
@@ -18,3 +19,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
 
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/{product}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::delete('/cart/{product}', [CartController::class, 'removeFromCart'])->name('cart.remove');

@@ -33,6 +33,13 @@
                                     <a href="{{ route('products.show', $product) }}" type="button"
                                         class="btn btn-sm btn-outline-secondary">View</a>
                                 </div>
+                                @auth
+                                    <form action="{{ route('cart.add', $product) }}" method="POST">
+                                        @csrf
+                                        <input type="number" name="quantity" value="1">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                                    </form>
+                                @endauth
                             </div>
                         </div>
                     </div>
