@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="container">
+        <form action="{{ url()->current() }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search products..."
+                    value="{{ request('search') }}">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </form>
+
         <div class="row justify-content-center">
             @foreach ($products as $product)
                 <div class="col-md-4">
