@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::where('is_active', true)->get();
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -42,6 +44,7 @@ class ProductController extends Controller
             'min_wholesale_qty' => 'required|integer|min:10',
             'quantity' => 'required|integer|min:0',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'nullable|exists:categories,id',
         ]);
 
         $product = Product::create($request->all()); //id 3
@@ -71,7 +74,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::where('is_active', true)->get();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**

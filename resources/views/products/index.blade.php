@@ -9,6 +9,7 @@
                     <tr>
                         <th>#ID</th>
                         <th>Photo</th>
+                        <th>Category</th>
                         <th>Product Name</th>
                         <th>Description</th>
                         <th>Retail Price</th>
@@ -26,6 +27,7 @@
                             <td>
                                 <img src="{{ Storage::url($product->photo) }}" class="img-thumbnail w-50">
                             </td>
+                            <td>{{ $product->category->name ?? 'Uncategorized' }}</td>
                             <td>
                                 <a href="{{ route('products.show', $product) }}">
                                     {{ $product->name }}

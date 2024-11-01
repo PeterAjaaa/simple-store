@@ -4,6 +4,7 @@
     <div class="container">
         <main>
             <h1>{{ $product->name }}</h1>
+            <h3>Category: {{ $product->category->name ?? 'Uncategorized' }}</h3>
             <p>
                 {{ $product->description }}
             </p>

@@ -15,7 +15,10 @@
                         @endisset"
                             alt="{{ $product->name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <h5 class="card-title">{{ $product->name }}
+                                <span class="badge bg-primary">{{ $product->category->name ?? 'Uncategorized' }}</span>
+                            </h5>
+
                             <p class="card-text">Rp. {{ $product->retail_price }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
