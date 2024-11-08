@@ -23,7 +23,13 @@ class CartController extends Controller
     public function addToCart(Product $product, Request $request)
     {
         $user = Auth::user();
-        $user->products()->attach($product, ['quantity' => $request->quantity ?? 1]);
+        if ($user->products->contains($product)) {
+            $user->products()->updateExistingPivot($product, [
+                'quantity' => $user->products->find($product)->pivot->quantity + ($request->quantity ?? 1)
+            ]);
+        } else {
+            $user->products()->attach($product, ['quantity' => $request->quantity ?? 1]);
+        }
         return redirect()->route('cart.index');
     }
 
